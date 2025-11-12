@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} 
+header {
+     background-color: #1F1D16;
+    padding: 0px ; 
+}
+.img_layout {
+    width: 120px;
+    height: 120px;
+}
+nav {
+   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}  
+
+.btn_layout {
+    display: flex;
+    justify-content: space-between;
+    
+}
