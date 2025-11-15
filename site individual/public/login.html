@@ -6,39 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AquaTech | Login</title>
+    <title>Coimbra-Fight | Login</title>
 
     <script src="./js/sessao.js"></script>
 
     <link rel="stylesheet" href="./css/estilo.css">
-    <link rel="icon" href="./assets/icon/favicon2.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
 <body>
 
     <!--Header-->
 
-    <div class="header">
-        <div class="container">
-            <h1 class="titulo">AquaTech</h1>
-            <ul class="navbar">
-                <li>
-                    <a href="index.html">Inicial</a>
-                </li>
-                <li>
-                    <a href="simulador.html">Simulador</a>
-                </li>
-                <li>|</li>
-                <li class="agora">
-                    <a href="#">Login</a>
-                </li>
-                <li>
+    <header>
+        <nav id="nav">
+            <div>
+                <img class="img_layout" src="/imagens/Coimbra fight (1).png" alt="">
+            </div>
+            <div class="btn_layout">
+                <div>
+                    <a href="index.html">Home</a>
+                </div>
+                <div>
+                    <a href="login.html">Login</a>
+                </div>
+                <div>
                     <a href="cadastro.html">Cadastro</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
 
 
     <div class="login">
@@ -49,7 +45,7 @@
         </div>
         <div class="container">
             <div class="card card-login">
-                <h2>Olá de volta!</h2>
+                <h2>Acesse sua Conta!</h2>
                 <div class="formulario">
                     <div class="campo">
                         <span>E-mail:</span>
@@ -73,9 +69,11 @@
 
     <!--footer inicio-->
     <div class="footer">
-        <div class="container">
-            <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
-            <span class="version">v1.0.0</span>
+        <div class="caixa">
+            <h4>Coimbra Fight &copy; 2025</h4>
+        </div>
+        <div class="caixa">
+            <img style="width: 100px; height: 100px;" src="/imagens/Coimbra fight (1).png" alt="">
         </div>
     </div>
     <!--footer fim-->
@@ -95,7 +93,7 @@
 
         if (emailVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            mensagem_erro.innerHTML = "Preencha todos os campos para acessar sua conta!";
             finalizarAguardar();
             return false;
         }
