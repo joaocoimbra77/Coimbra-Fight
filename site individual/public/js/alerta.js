@@ -32,7 +32,7 @@ function alertar(resposta, idAquario) {
         frio: 10,
         muito_frio: 5
     };
-
+// calculo de imc
     var classe_temperatura = 'cor-alerta';
 
     if (temp >= limites.muito_quente) {

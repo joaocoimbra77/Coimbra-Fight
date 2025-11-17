@@ -39,33 +39,21 @@
     <!-- simulador inicio -->
     <div class="simulador">
         <div class="container">
-            <h2>Simulador</h2>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
-                dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
-                laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Accusantium tempora architecto sint fugit dolorum? Ipsum laborum magnam similique labore, voluptate amet
-                reprehenderit rem ab blanditiis quisquam laboriosam eaque alias. Reiciendis.</p>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
-                dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
-                laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Accusantium tempora architecto sint fugit dolorum? Ipsum laborum magnam similique labore, voluptate amet
-                reprehenderit rem ab blanditiis quisquam laboriosam eaque alias. Reiciendis.</p>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
-                dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
-                laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Accusantium tempora architecto sint fugit dolorum? Ipsum laborum magnam similique labore, voluptate amet
-                reprehenderit rem ab blanditiis quisquam laboriosam eaque alias. Reiciendis.</p>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
-                dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
-                laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Accusantium tempora architecto sint fugit dolorum? Ipsum laborum magnam similique labore, voluptate amet
-                reprehenderit rem ab blanditiis quisquam laboriosam eaque alias. Reiciendis.</p>
+            <h1>Simulador de Treinamento</h1>
+            <p>Aqui começa a sua jornada rumo a uma versão mais forte, mais resistente e mais confiante de você mesmo. No Simulador da Coimbra-Fight, você descobre quantas calorias pode perder em um treino inspirado nos desafios reais do boxe.<br><br>
+             Preencha as informações a baixo para ter acesso ao relatório:</p><br><br>
 
-        </div>
+             <span>Informe sua Altura:</span> <input type="number" id="iptAltura" placeholder="Ex:1.70">
+             <div class="falha" id="erro_altura"></div><br><br>
+             <span>Informe seu Peso (em Kg):</span> <input type="number" id="iptPeso" placeholder="Ex:65">
+             <div class="falha" id="erro_peso"></div><br><br>
+             <span>Quantos dias você pretende treinar por mês:</span> <input type="number" id="iptTreino" placeholder="Ex:15">
+             <div class="falha" id="erro_treino"></div><br><br>
+             <a href="#mensagem"><button onclick="simular()">Simular</button></a><br>
+            </div>
+            <div id="mensagem" class="mensagem" style="display: none;"></div>
     </div>
-    <!-- simulador fim -->
 
-    <!--footer inicio-->
        <div class="footer">
         <div class="caixa">
             <h4>Coimbra Fight &copy; 2025</h4>
@@ -74,9 +62,39 @@
             <img style="width: 100px; height: 100px;" src="/imagens/Coimbra fight (1).png" alt="">
         </div>
     </div>
-    <!--footer fim-->
-
 
 </body>
+<script>
+    function simular() {
+    var altura = Number(iptAltura.value);
+    var peso = Number(iptPeso.value);
+    var treino = Number(iptTreino.value);
+    var erro = 0;
 
+     erro_altura.innerHTML='';
+    erro_peso.innerHTML='';
+    erro_treino.innerHTML='';
+    mensagem.innerHTML='';
+     document.getElementById("mensagem").style.display = "none";
+
+    if (altura < 1.20 || altura > 2.30) {
+      erro_altura.innerHTML = "Insira uma altura entre 1.20 até 2.30";
+      erro +=1;
+    } if (peso < 30 || peso >250 || peso%1 !=0) {
+      erro_peso.innerHTML = "Insira um peso apenas em Kg e entre 30Kg e 250Kg";
+      erro +=1;
+    } if (treino < 5 || treino > 25) {
+      erro_treino.innerHTML = "Insira uma quantidade entre 5 e 25 dias"; 
+      erro +=1;
+    } if(erro == 0) {
+    document.getElementById("mensagem").style.display = "block";
+    var calorias = 9 * peso;
+    var caloriasFinal = calorias * treino;
+    
+    mensagem.innerHTML = `<span>Com sua altura de ${iptAltura.value}cm e peso de ${peso}Kg esse foi seu relatório:<br>
+    Levando em consideração que cada treino será de 1 hora e de uma intensidade moderada.<p><b>Sua perca de calorias atinge ${calorias}kcal por dia. Comprindo esses requesitos, ao final dos ${treino} dias de treino você perdeu ${caloriasFinal}kcal no mês!!</b></p><br>
+    Vale lembrar que não é apenas os treinos que te fará ter resultados, mas também uma alimentação saúdavel e uma rotina de sono equilibrada. Não perca tempo e entre já para o time e faça parte desse esporte incrível!❤️</span>`;
+    }
+    }
+</script>
 </html>

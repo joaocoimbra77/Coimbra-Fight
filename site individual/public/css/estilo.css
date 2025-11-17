@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Jost:wght@500&family=Reddit+Sans:ital,wght@0,200..900;1,200..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
@@ -56,6 +59,11 @@ nav {
   font-size: 20px;
   border-radius: 10px;
   font-family: "Jost", sans-serif;
+  cursor: pointer;
+}
+
+.btn_layout a:hover {
+    background-color: #ffdd4d;
 }
 
 /* sessão principal */
@@ -71,18 +79,21 @@ nav {
   align-items: center;
   justify-content: center;
   position: relative;
+  color: #fff;
 }
 
 .conteiner-principal {
-  background-color: #e5e5e5;
+  font-family: "Jost", sans-serif;
   padding: 20px 30px;
   border-radius: 12px;
   text-align: center;
   max-width: 400px;
+  font-size: 40px;
+  margin-bottom: 100px;
 }
 
-.conteiner-principal h2 {
-  font-family: "Open Sans", sans-serif;
+.conteiner-principal b {
+  color: #FFBD00;
 }
 
 /* sessao objetivo */
@@ -90,6 +101,15 @@ nav {
 .objetivo {
   background-color: #e5e5e5;
   display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+  justify-self: center;
+  font-family: "Open Sans", sans-serif;
+  font-size: 40px;
+  margin-bottom: 0px;
 }
 
 .objetivo .container {
@@ -104,14 +124,14 @@ nav {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 30px 0;
 }
 
-.objetivo p {
-  text-align: center;
+.objetivo .caixa .box p {
+  text-align: justify;
   font-size: 20px;
   text-align: left;
   font-family: "Jost", sans-serif;
+  width: 80%;
 }
 
 .box {
@@ -123,6 +143,7 @@ nav {
 
 .box h1 {
   font-family: "Open Sans", sans-serif;
+  margin: 0;
 }
 
 /* sessão cards */
@@ -336,7 +357,7 @@ nav {
 
 input {
   margin-bottom: 10px;
-  border: 4px solid #FFBD00;
+  border: 2px solid #FFBD00;
   padding: 10px;
   text-align: center;
   border-radius: 10px;
@@ -373,10 +394,77 @@ input {
   color: white;
 }
 
+.simulador .container h1 {
+  font-size: 60px;
+  font-family: "Open Sans", sans-serif;
+}
+
+.simulador .container p {
+  font-size: 30px;
+  font-family: "Jost", sans-serif;
+  margin-bottom: 0;
+}
+
+.simulador .container span {
+  font-size: 15px;
+  font-family: "Jost", sans-serif;
+}
+
 .simulador .container {
   flex-direction: column;
-  overflow: scroll; 
-  height: var(--tamanho-simulador);
+}
+
+.simulador .container .falha {
+  color: #ED145B;
+}
+
+.simulador .container button {
+  border-radius: 8px;
+  width: 200px;
+  height: 40px;
+  margin-bottom: 20px;
+  margin-left: 500px;
+  background-color: #FFBD00;
+  font-size: 20px;
+  cursor: pointer;
+  font-family: "Jost", sans-serif;
+}
+
+.simulador .container button a {
+  text-decoration: none;
+  font-size: 20px;
+  color: #1a1a1a;
+  
+}
+
+.simulador .mensagem {
+  background: #1a1a1a;
+  border: 5px solid #FFBD00;
+  border-radius: 15px;
+  width: 800px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #ffffff;
+  text-align: center;
+  margin-left: 330px;
+  margin-bottom: 100px;
+  font-size: 25px;
+  padding-bottom: 40px;
+  padding-top: 40px;
+}
+
+.simulador .mensagem p {
+  background-color: #90EE90;
+  color: #1a1a1a;
+  border-radius: 10px;
+  font-family: "Jost", sans-serif;
+}
+
+.simulador .mensagem span {
+  padding: 10px;
+  padding-bottom: 40px;
+  padding-top: 40px;
+  font-family: "Jost", sans-serif;
 }
 
 /* ALERTA */
