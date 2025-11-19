@@ -2,10 +2,123 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+ body {
+    background: #e5e5e5;
+    display: flex;
+    margin: 0;
+}
+
+
+.layout {
+    width: 220px;
+    background: #1F1D16;
+    height: 100vh;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    width: 120px;
+    height: 120px;
+    background: url("/imagens/Coimbra\ fight\ \(1\).png");
+    margin-bottom: 40px;
+}
+
+.ola {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.ola h3 {
+  color: #ffffff;
+  font-weight: 300;
+  font-size: 25px;
+}
+
+.ola h3 span {
+  color: #FFBD00;
+  font-weight: 800;
+}
+
+.btn-dash {
+    padding: 12px;
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.btn-dash a {
+    text-decoration: none;
+  background-color: #1F1D16;
+  color: #ffffff;
+  padding: 15px;
+  font-size: 20px;
+  border-radius: 10px;
+  font-family: "Jost", sans-serif;
+  cursor: pointer;
+}
+
+.btn-dash a:hover {
+   color: #FFBD00;
+}
+
+.btn-sair {
+    padding: 12px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 130px
+}
+
+.btn-sair a {
+    text-decoration: none;
+  background-color: #1F1D16;
+  color: #ffffff;
+  padding: 15px;
+  font-size: 20px;
+  border-radius: 10px;
+  font-family: "Jost", sans-serif;
+  cursor: pointer;
+}
+
+.btn-sair a:hover {
+   color: #FFBD00;
+}
+
+.main {
+    flex: 1;
+    padding: 30px;
+}
+
+.indicadores {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+.indicador {
+    
+    border: 4px solid black;
+    width: 25%;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.indicador h3 {
+    font-size: 20px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.indicador p {
+    font-size: 35px;
+    margin: 10px 0 0;
+    font-weight: bold;
 }
 
 .label-captura {

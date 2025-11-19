@@ -53,8 +53,8 @@ nav {
 
 .btn_layout a {
   text-decoration: none;
-  background-color: #FFBD00;
-  color: #1F1D16;
+  background-color: #1F1D16;
+  color: #ffffff;
   padding: 15px;
   font-size: 20px;
   border-radius: 10px;
@@ -63,7 +63,7 @@ nav {
 }
 
 .btn_layout a:hover {
-    background-color: #ffdd4d;
+color: #FFBD00;
 }
 
 /* sessão principal */
@@ -79,7 +79,7 @@ nav {
   align-items: center;
   justify-content: center;
   position: relative;
-  color: #fff;
+  color: #ffffff;
 }
 
 .conteiner-principal {
@@ -466,6 +466,31 @@ input {
   padding-top: 40px;
   font-family: "Jost", sans-serif;
 }
+
+/* Quiz */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ALERTA */
 

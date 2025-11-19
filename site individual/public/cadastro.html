@@ -28,7 +28,7 @@
                     <a href="login.html">Login</a>
                 </div>
                 <div>
-                    <a href="cadastro.html">Cadastro</a>
+                    <a href="cadastro.html" style="text-decoration: underline; color: #ffbd00;">Cadastrar</a>
                 </div>
             </div>
         </nav>
@@ -65,7 +65,7 @@
           <button class="botao" onclick="cadastrar()">Cadastrar</button>
         </div>
         <div id="div_aguardar" class="loading-div">
-          <img src="./assets/circle-loading.gif" id="loading-gif" />
+          <img src="./imagens/gifcarregando.gif" id="loading-gif" />
         </div>
 
         <div id="div_erros_login"></div>
@@ -166,7 +166,7 @@
 
           setTimeout(() => {
             window.location = "login.html";
-          }, "3000");
+          }, "4000");
 
           limparFormulario();
           finalizarAguardar();
@@ -181,26 +181,6 @@
 
     return false;
   }
-
-  // Listando empresas cadastradas 
-  // function listar() {
-  //   fetch("/empresas/listar", {
-  //     method: "GET",
-  //   })
-  //     .then(function (resposta) {
-  //       resposta.json().then((empresas) => {
-  //         empresas.forEach((empresa) => {
-  //           listaEmpresasCadastradas.push(empresa);
-
-  //           console.log("listaEmpresasCadastradas")
-  //           console.log(listaEmpresasCadastradas[0].codigo_ativacao)
-  //         });
-  //       });
-  //     })
-  //     .catch(function (resposta) {
-  //       console.log(`#ERRO: ${resposta}`);
-  //     });
-  // }
 
   function sumirMensagem() {
     cardErro.style.display = "none";

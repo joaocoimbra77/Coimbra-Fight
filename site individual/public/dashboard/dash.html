@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Coimbra Fight | DashBoard</title>
+<link rel="stylesheet" href="dashboards.css">
+</head>
+
+<body>
+<header>
+    <div class="layout">
+        <div class="logo"></div>
+         <div class="ola"><h3>Olá, <span id="b_usuario">usuário</span></h3></div>
+        <div class="btn-dash"><a href="dash.html" style="text-decoration: underline; color: #ffbd00;">Desempenho</a></div>
+        <div class="btn-dash"><a href="treino.html">Adicionar Treino</a></div>
+        <div class="btn-sair"><a href="./index.html">Sair</a></div>
+    </div>
+</header>
+    <div class="main">
+        <div class="indicadores">
+
+            <div class="indicador">
+                <h3>Alta Frequência em:</h3>
+                <p>Setembro</p>
+            </div>
+
+            <div class="indicador">
+                <h3>Intencidade nesse mês:</h3>
+                <p>Alta</p>
+            </div>
+
+            <div class="indicador">
+                <h3>Horas Médias por Mês:</h3>
+                <p>10,6</p>
+            </div>
+</body>
+<script>
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+</script>
+</html>
