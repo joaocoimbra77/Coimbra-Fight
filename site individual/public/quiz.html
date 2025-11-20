@@ -4,20 +4,214 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coimbra-Fight | Quiz</title>
-    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/quiz.css">
 </head>
-<body>
+<body">
+    <header>
+        <nav id="nav">
+            <div>
+                <img class="img_layout" src="/imagens/Coimbra fight (1).png" alt="">
+            </div>
+            <div class="btn_layout">
+                <div>
+                    <a href="index.html">Home</a>
+                </div>
+                <div>
+                    <a href="login.html">Login</a>
+                </div>
+                <div>
+                    <a href="cadastro.html">Cadastrar</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
    <div class="app">
     <h1>Quiz</h1>
-   </div> 
-   <div class="quiz">
-    <h2 class="questao">questão</h2>
-    <div class="alternativa">
-     <button class="btn">A1</button>
-     <button class="btn">A2</button>
-     <button class="btn">A3</button>
-     <button class="btn">A4</button>
+    <div class="quiz">
+     <h2 id="question">questão</h2>
+     <div id="alternativa">
+      <button class="btnAl">A1</button>
+      <button class="btnAl">A2</button>
+      <button class="btnAl">A3</button>
+      <button class="btnAl">A4</button>
+     </div>
+     <button id="btnProximo">next</button>
     </div>
-   </div>
+   </div> 
 </body>
+<script>
+    const questoes = [
+        {
+            question: "Qual o lutador com o maior número de nocautes na carreira?",
+            resposta: [
+                { id: 1, text: "Archie Moore", correta: true},
+                { id: 2, text: "Gervonta Davis", correta: false},
+                { id: 3, text: "Anderson Silva", correta: false},
+                { id: 4, text: "Billy Fox", correta: false},
+            ]
+        },
+        {
+            question: "Qual brasileiro foi o ultimo campeão mundial no boxe?",
+            resposta: [
+                { id: 1, text: "Popó Freitas", correta: false},
+                { id: 2, text: "Adilson Maguila", correta: false},
+                { id: 3, text: "Charles Oliveira", correta: false},
+                { id: 4, text: "Robson Conceição", correta: true},
+            ],
+        },
+        {
+            question: "Quantas vitórias Floyd Mayweather tem em sua carreira?",
+            resposta: [
+                { id: 1, text: "77 Vitórias", correta: false},
+                { id: 2, text: "27 Vitórias", correta: false},
+                { id: 3, text: "50 Vitórias", correta: true},
+                { id: 4, text: "64 Vitórias", correta: false},
+            ],
+        },
+        {
+            question: "Qual lutador é conhecido por morder as luvas?",
+            resposta: [
+                { id: 1, text: "Gervonta Davis", correta: false},
+                { id: 2, text: "Muhammad Ali", correta: false},
+                { id: 3, text: "José Aldo", correta: false},
+                { id: 4, text: "Mike Tyson", correta: true},
+            ],
+        },
+        {
+            question: "Em que ano Maguila foi campeão mundial?",
+            resposta: [
+                { id: 1, text: "1980", correta: false},
+                { id: 2, text: "1990", correta: false},
+                { id: 3, text: "1995", correta: true},
+                { id: 4, text: "2000", correta: false},
+            ],
+        },
+        {
+            question: "Qual a diferença entre Boxe e Kickboxing?",
+            resposta: [
+                { id: 1, text: "O Boxe utiliza os pés, já o Kickboxing apenas as mãos.", correta: false},
+                { id: 2, text: "Kickboxing é uma luta estilo jiu jitsu.", correta: false},
+                { id: 3, text: "Não há diferenças.", correta: false},
+                { id: 4, text: "Boxe utiliza apenas as mãos, já o Kickboxing utiliza tanto os pés quanto as mãos", correta: true},
+            ],
+        },
+        {
+            question: "Em que ano Muhammad Ali se aposentou do boxe?",
+            resposta: [
+                { id: 1, text: "1981", correta: true},
+                { id: 2, text: "1970", correta: false},
+                { id: 3, text: "1984", correta: false},
+                { id: 4, text: "1962", correta: false},
+            ],
+        },
+        {
+            question: "Em que ano o Boxe voltou aos Jogos Olímpicos?",
+            resposta: [
+                { id: 1, text: "1950", correta: false},
+                { id: 2, text: "1945", correta: false},
+                { id: 3, text: "1970", correta: false},
+                { id: 4, text: "1904", correta: true},
+            ],
+        },
+        {
+            question: "Qual lutador de MMA desafiou Floyd Mayweather?",
+            resposta: [
+                { id: 1, text: "Anderson Silva", correta: false},
+                { id: 2, text: "Alex Poatan", correta: false},
+                { id: 3, text: "José Aldo", correta: false},
+                { id: 4, text: "Conor McGregor", correta: true},
+            ],
+        },
+        {
+            question: "Qual é o melhor esporte de combate?",
+            resposta: [
+                { id: 1, text: "Boxe", correta: false},
+                { id: 2, text: "Jiu Jitsu", correta: false},
+                { id: 3, text: "Todos, cada modalidade tem seus pontos fortes.", correta: true},
+                { id: 4, text: "Muay Thai", correta: false},
+            ],
+        },
+    ]
+
+    const questaoElement = document.getElementById('question');
+    const alternativaButtons = document.getElementById('alternativa');
+    const btnproximo = document.getElementById('btnProximo');
+
+    let questaoAtualIndex = 0;
+    let pontuacao = 0;
+
+    function startQuiz() {
+    questaoAtualIndex = 0;
+    pontuacao = 0;
+    btnProximo.innerHTML = 'Próxima';
+    mostrarQuestao();  
+    }
+    
+    function resetarBotao() {
+    btnProximo.style.display = 'none';
+    while (alternativaButtons.firstChild) {
+       alternativaButtons.removeChild(alternativaButtons.firstChild); 
+    }  
+    }
+
+    function mostrarQuestao() {
+    resetarBotao()
+    let questaoAtual = questoes[questaoAtualIndex];
+    let questaoNumero = questaoAtualIndex + 1;
+    questaoElement.innerHTML = questaoNumero + '.' + questaoAtual.question;
+    questaoAtual.resposta.forEach((resposta) => {
+        const button = document.createElement("button");
+        button.innerHTML = resposta.text;
+        button.dataset.id = resposta.id;
+        button.classList.add('btnAl');
+        button.addEventListener('click', selecionarResposta);
+        alternativaButtons.appendChild(button)
+    })
+    }
+
+    function selecionarResposta(e) {
+    resposta = questoes[questaoAtualIndex].resposta;
+    const respostaCorreta = resposta.filter((resposta) => resposta.correta == true)[0];
+    const btnSelecionado = e.target;
+    const verificacaoCorreta = btnSelecionado.dataset.id == respostaCorreta.id;
+    if (verificacaoCorreta) {
+    btnSelecionado.classList.add("correto");
+    pontuacao++      
+    } else {
+        btnSelecionado.classList.add("errada");
+    }
+    Array.from(alternativaButtons.children).forEach((button) => {
+        button.disabled = true;
+    });
+    btnProximo.style.display = 'block';
+    }
+
+    function proximaQuestao() {
+        questaoAtualIndex++;
+        if (questaoAtualIndex < questoes.length) {
+        mostrarQuestao();    
+        } else {
+            mostrarPontuacao();
+        }
+    }
+
+    btnProximo.addEventListener('click', () => {
+        if (questaoAtualIndex < questoes.length) {
+        proximaQuestao();    
+        } else {
+            startQuiz();
+        }
+    })
+
+    function mostrarPontuacao() {
+    resetarBotao();
+    questaoElement.innerHTML = `Você acertou ${pontuacao} de ${questoes.length}!`;
+    btnProximo.innerHTML = 'Jogar Novamente';
+    btnProximo.style.display ='block';
+    }
+
+    startQuiz();
+</script>
 </html>
