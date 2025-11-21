@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coimbra-Fight | Adicionar Treino</title>
+    <link rel="stylesheet" href="dashboards.css">
+</head>
+<body>
+    <header>
+        <div class="layout">
+            <div>
+                <img class="img_layout" src="../imagens/Coimbra fight (1).png" alt="">
+            </div>
+            <div class="ola">
+                <h3>Olá, <span id="b_usuario">usuário</span></h3>
+            </div>
+            <div class="btn-dash"><a href="dash.html">Desempenho</a>
+            </div>
+            <div class="btn-dash"><a href="treino.html"  style="text-decoration: underline; color: #ffbd00;">Adicionar Treino</a></div>
+            <div class="btn-sair" onclick="limparSessao()"><a href="../index.html">Sair</a></div>
+        </div>
+    </header>
+
+     <div class="main">
+         <h1 class="titulo">Registrar Treino:</h1><br> 
+         <p class="text-inicial">Insira as informações solicitadas a baixo para ter acesso a nossa DashBoard e monitorar seu desempenho no boxe:</p><br><br>
+         
+         <div class="campos">
+             <h4>Selecione o mês que deseja:</h4> 
+             <select id="slc-mes">
+                 <option value="#">Selecione...</option>
+                 <option value="01">Janeiro</option>
+                 <option value="02">Fevereiro</option>
+                 <option value="03">Março</option>
+                 <option value="04">Abril</option>
+                 <option value="05">Maio</option>
+                 <option value="06">Junho</option>
+                 <option value="07">Julho</option>
+                 <option value="08">Agosto</option>
+                 <option value="09">Setembro</option>
+                 <option value="10">Outubro</option>
+                 <option value="11">Novembro</option>
+                 <option value="12">Dezembro</option>
+                </select><br><br>
+                <h4>informe a quantidade de dias de treino nesse mês:</h4> <input type="number" id="iptDias"><br><br>
+                <h4>Informe a quantidade de Horas de treino nesse mês:</h4> <input type="number" id="iptHoras"><br><br>
+            </div>
+            <a class="btn-registrar" href=""><button>Registrar</button></a>
+        </div>
+        </body>
+        <script>
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
+</script>
+</html>

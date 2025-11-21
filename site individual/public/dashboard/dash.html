@@ -1,40 +1,82 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-<meta charset="UTF-8">
-<title>Coimbra Fight | DashBoard</title>
-<link rel="stylesheet" href="dashboards.css">
+    <meta charset="UTF-8">
+    <title>Coimbra Fight | DashBoard</title>
+    <link rel="stylesheet" href="dashboards.css">
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
-<header>
-    <div class="layout">
-        <div class="logo"></div>
-         <div class="ola"><h3>Olá, <span id="b_usuario">usuário</span></h3></div>
-        <div class="btn-dash"><a href="dash.html" style="text-decoration: underline; color: #ffbd00;">Desempenho</a></div>
-        <div class="btn-dash"><a href="treino.html">Adicionar Treino</a></div>
-        <div class="btn-sair"><a href="../index.html">Sair</a></div>
-    </div>
-</header>
+    <header>
+        <div class="layout">
+            <div> <img class="img_layout" src="../imagens/Coimbra fight (1).png" alt=""></div>
+            <div class="ola">
+                <h3>Olá, <span id="b_usuario">usuário</span></h3>
+            </div>
+            <div class="btn-dash"><a href="dash.html" style="text-decoration: underline; color: #ffbd00;">Desempenho</a>
+            </div>
+            <div class="btn-dash"><a href="treino.html">Adicionar Treino</a></div>
+            <div class="btn-sair" onclick="limparSessao()"><a href="../index.html">Sair</a></div>
+        </div>
+    </header>
     <div class="main">
-        <div class="indicadores">
+    <div class="indicadores">
 
-            <div class="indicador">
-                <h3>Alta Frequência em:</h3>
-                <p>Setembro</p>
+        <div class="indicador">
+            <h3>Alta Frequência em:</h3>
+            <p>Setembro</p>
+        </div>
+
+        <div class="indicador">
+            <h3>Intencidade nesse mês:</h3>
+            <p>Alta</p>
+        </div>
+
+        <div class="indicador">
+            <h3>Horas Médias por Mês:</h3>
+            <p>10,6</p>
+        </div>
+    </div>
+
+            <div class="grafico-line">
+                <canvas id="myChart2" style="position: relative; height: 50vh; width: 80vh;"></canvas>
             </div>
-
-            <div class="indicador">
-                <h3>Intencidade nesse mês:</h3>
-                <p>Alta</p>
-            </div>
-
-            <div class="indicador">
-                <h3>Horas Médias por Mês:</h3>
-                <p>10,6</p>
             </div>
 </body>
 <script>
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+   
+    const ctx2 = document.getElementById('myChart2').getContext('2d');
+const mixedChart2 = new Chart(ctx2, {
+    data: {
+        datasets: [
+            {
+                type: 'line',
+                label: 'Temperatura média °C',
+                data: [30, 29, 28, 25, 22, 23],
+                backgroundColor: 'rgb(255, 0, 0)',
+                borderColor: 'rgb(255, 0, 0)',
+            },
+            {
+                type: 'line',
+                label: 'Umidade Média %',
+                data: [80, 82, 80, 85, 80, 83],
+                backgroundColor: 'rgb(0, 0, 255)',
+                borderColor: 'rgb(0, 0, 255)',
+            }
+        ],
+        labels: ['12:00', '13:00', '14:00', '15:00','16:00', '17:00'],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: false
+        }
+      }
+    }
+  });
 </script>
+
 </html>
