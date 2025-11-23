@@ -73,8 +73,8 @@
             erro_mes.innerHTML = 'Selecione um mês que deseja inserir as informações.';
             erro++;
         }
-        if (iptDias.value % 1 != 0 || iptDias.value <= 0) {
-            erro_dias.innerHTML = 'Insira um quantidade de dias maior que 0.';
+        if (iptDias.value % 1 != 0 || iptDias.value <= 0 || iptDias.value > 30) {
+            erro_dias.innerHTML = 'Insira um quantidade de dias maior que 0 e até 30 dias.';
             erro++;
         }
         if (iptHoras.value % 1 != 0 || iptHoras.value <= 0) {

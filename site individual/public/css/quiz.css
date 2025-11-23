@@ -74,6 +74,7 @@ nav {
   font-size: 18px;
   color: #1F1D16;
   font-weight: 600;
+  font-family: "Jost", sans-serif;
 }
 
 .btnAl {
@@ -88,6 +89,7 @@ nav {
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s;
+  font-family: "Jost", sans-serif;
 }
 
 .btnAl:hover {
@@ -106,6 +108,7 @@ nav {
   margin: 20px auto 0;
   border-radius: 4px;
   cursor: pointer;
+  font-family: "Jost", sans-serif;
  
 }
 

@@ -37,7 +37,7 @@
       <button class="btnAl">A3</button>
       <button class="btnAl">A4</button>
      </div>
-     <button id="btnProximo">next</button>
+     <button id="btnProximo">Próxima</button>
     </div>
    </div> 
 </body>
@@ -135,83 +135,77 @@
         },
     ]
 
-    const questaoElement = document.getElementById('question');
-    const alternativaButtons = document.getElementById('alternativa');
-    const btnproximo = document.getElementById('btnProximo');
-
-    let questaoAtualIndex = 0;
+    let questaoAtual = 0;
     let pontuacao = 0;
 
-    function startQuiz() {
-    questaoAtualIndex = 0;
-    pontuacao = 0;
-    btnProximo.innerHTML = 'Próxima';
-    mostrarQuestao();  
-    }
-    
-    function resetarBotao() {
-    btnProximo.style.display = 'none';
-    while (alternativaButtons.firstChild) {
-       alternativaButtons.removeChild(alternativaButtons.firstChild); 
-    }  
-    }
+    const questionEl = document.getElementById("question");
+    const alternativasEl = document.getElementById("alternativa");
+    const btnProximo = document.getElementById("btnProximo");
 
     function mostrarQuestao() {
-    resetarBotao()
-    let questaoAtual = questoes[questaoAtualIndex];
-    let questaoNumero = questaoAtualIndex + 1;
-    questaoElement.innerHTML = questaoNumero + '.' + questaoAtual.question;
-    questaoAtual.resposta.forEach((resposta) => {
-        const button = document.createElement("button");
-        button.innerHTML = resposta.text;
-        button.dataset.id = resposta.id;
-        button.classList.add('btnAl');
-        button.addEventListener('click', selecionarResposta);
-        alternativaButtons.appendChild(button)
-    })
+        alternativasEl.innerHTML = "";
+        btnProximo.style.display = "none";
+
+        const questao = questoes[questaoAtual];
+        questionEl.innerHTML = `${questaoAtual + 1}. ${questao.question}`;
+
+        for (let index = 0; index < questao.resposta.length; index++) {
+            const botao = document.createElement("button");
+            botao.innerText = questao.resposta[index].text;
+            botao.classList.add("btnAl");
+
+            botao.onclick = function () {
+                verificarResposta(questao.resposta[index].correta, botao);
+            };
+
+            alternativasEl.appendChild(botao);
+        }
     }
 
-    function selecionarResposta(e) {
-    resposta = questoes[questaoAtualIndex].resposta;
-    const respostaCorreta = resposta.filter((resposta) => resposta.correta == true)[0];
-    const btnSelecionado = e.target;
-    const verificacaoCorreta = btnSelecionado.dataset.id == respostaCorreta.id;
-    if (verificacaoCorreta) {
-    btnSelecionado.classList.add("correto");
-    pontuacao++      
-    } else {
-        btnSelecionado.classList.add("errada");
-    }
-    Array.from(alternativaButtons.children).forEach((button) => {
-        button.disabled = true;
-    });
-    btnProximo.style.display = 'block';
+    function verificarResposta(certa, botaoClicado) {
+        const botoes = alternativasEl.getElementsByTagName("button");
+
+        for (let index = 0; index < botoes.length; index++) {
+            botoes[index].disabled = true;
+        }
+
+        if (certa === true) {
+            botaoClicado.classList.add("correto");
+            pontuacao++;
+        } else {
+            botaoClicado.classList.add("errada");
+        }
+
+        btnProximo.style.display = "block";
     }
 
-    function proximaQuestao() {
-        questaoAtualIndex++;
-        if (questaoAtualIndex < questoes.length) {
-        mostrarQuestao();    
+    btnProximo.onclick = function () {
+        questaoAtual++;
+
+        if (questaoAtual < questoes.length) {
+            mostrarQuestao();
         } else {
             mostrarPontuacao();
         }
-    }
-
-    btnProximo.addEventListener('click', () => {
-        if (questaoAtualIndex < questoes.length) {
-        proximaQuestao();    
-        } else {
-            startQuiz();
-        }
-    })
+    };
 
     function mostrarPontuacao() {
-    resetarBotao();
-    questaoElement.innerHTML = `Você acertou ${pontuacao} de ${questoes.length}!`;
-    btnProximo.innerHTML = 'Jogar Novamente';
-    btnProximo.style.display ='block';
+        questionEl.innerHTML = `Você acertou ${pontuacao} de ${questoes.length}!`;
+        if (pontuacao == 10) {
+         questionEl.innerHTML += `<br>UAU, você conhece mesmo de Boxe! 😎🔥`;   
+        }
+        alternativasEl.innerHTML = "";
+        btnProximo.innerText = "Jogar Novamente";
+        btnProximo.style.display = "block";
+
+        btnProximo.onclick = function () {
+            questaoAtual = 0;
+            pontuacao = 0;
+            btnProximo.innerText = "Próxima";
+            mostrarQuestao();
+        };
     }
 
-    startQuiz();
+    mostrarQuestao();
 </script>
 </html>

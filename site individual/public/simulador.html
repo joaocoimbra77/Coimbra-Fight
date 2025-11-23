@@ -40,7 +40,7 @@
     <div class="simulador">
         <div class="container">
             <h1>Simulador de Treinamento</h1>
-            <p>Aqui começa a sua jornada rumo a uma versão mais forte, mais resistente e mais confiante de você mesmo. No Simulador da Coimbra-Fight, você descobre quantas calorias pode perder em um treino inspirado nos desafios reais do boxe.<br><br>
+            <p>Aqui começa a sua jornada rumo a uma versão mais forte, mais resistente e mais confiante de você mesmo. No Simulador da Coimbra-Fight, você descobre quantas calorias pode perder em um treino inspirado nos desafios reais do boxe. Os calculos são feitos a partir do MET, uma forma de medir o gasto energético de uma atividade física.<br><br>
              Preencha as informações a baixo para ter acesso ao relatório:</p><br><br>
 
              <span>Informe sua Altura:</span> <input type="number" id="iptAltura" placeholder="Ex:1.70">
@@ -83,15 +83,15 @@
     } if (peso < 30 || peso >250 || peso%1 !=0) {
       erro_peso.innerHTML = "Insira um peso apenas em Kg e entre 30Kg e 250Kg";
       erro +=1;
-    } if (treino < 5 || treino > 25) {
-      erro_treino.innerHTML = "Insira uma quantidade entre 5 e 25 dias"; 
+    } if (treino <= 0 || treino > 30) {
+      erro_treino.innerHTML = "Insira um quantidade de dias maior que 0 e até 30 dias."; 
       erro +=1;
     } if(erro == 0) {
     document.getElementById("mensagem").style.display = "block";
     var calorias = 9 * peso;
     var caloriasFinal = calorias * treino;
     
-    mensagem.innerHTML = `<span>Com sua altura de ${iptAltura.value}cm e peso de ${peso}Kg esse foi seu relatório:<br>
+    mensagem.innerHTML = `<br><span>Com sua altura de ${iptAltura.value}cm e peso de ${peso}Kg esse foi seu relatório:<br>
     Levando em consideração que cada treino será de 1 hora e de uma intensidade moderada.<p><b>Sua perca de calorias atinge ${calorias}kcal por dia. Comprindo esses requesitos, ao final dos ${treino} dias de treino você perdeu ${caloriasFinal}kcal no mês!!</b></p><br>
     Vale lembrar que não é apenas os treinos que te fará ter resultados, mas também uma alimentação saúdavel e uma rotina de sono equilibrada. Não perca tempo e entre já para o time e faça parte desse esporte incrível!❤️</span>`;
     }
