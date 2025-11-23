@@ -14,14 +14,17 @@ function name(params) {
 }
 
 function cadastrar(req, res) {
-    var nome = req.body.nome;
+    var mes = req.body.mesServer;
+    var dias_treino = req.body.treinoServer;
+    var horas = req.body.horasServer;
+    var fkUsuario = req.body.idServer;
 
-    if (nome == undefined) {
-        res.status(400).send("Seu nome está undefined!");
+    if (mes == undefined) {
+        res.status(400).send("Seu mes está undefined!");
     }
 
-    treinoModel.cadastrar(nome).then(function(resposta){
-        res.status(200).send("Carro criado com sucesso");
+    treinoModel.cadastrar(mes,dias_treino,horas,fkUsuario).then(function(resposta){
+        res.status(200).send("Treino criado com sucesso");
     }).catch(function(erro){
         res.status(500).json(erro.sqlMessage);
     })

@@ -114,7 +114,6 @@
     var emailVar = email_input.value;
     var senhaVar = senha_input.value;
     
-    // Verificando se há algum campo em branco
     if ( nomeVar == "" || emailVar == "" || senhaVar == "" )  {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
@@ -140,7 +139,7 @@
       return false;
     } 
     else {
-      setInterval(sumirMensagem, 5000);
+      setInterval(sumirMensagem, 4000);
     }
 
     // Enviando o valor da nova input
@@ -166,7 +165,7 @@
 
           setTimeout(() => {
             window.location = "login.html";
-          }, "4000");
+          }, "2000");
 
           limparFormulario();
           finalizarAguardar();

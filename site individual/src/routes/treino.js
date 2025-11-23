@@ -4,12 +4,12 @@ var router = express.Router();
 var treinoController = require("../controllers/treinoController");
 
 router.post("/cadastrar", function (req, res) {
-    // função a ser chamada quando acessar /carros/cadastrar
+    // função a ser chamada quando acessar /treino/cadastrar
     treinoController.cadastrar(req, res);
 });
 
 router.get("/listar", function (req, res) {
-    // função a ser chamada quando acessar /carros/listar
+    // função a ser chamada quando acessar /treino/listar
     treinoController.listar(req, res);
 });
 

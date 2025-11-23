@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <title>Coimbra Fight | DashBoard</title>
     <link rel="stylesheet" href="dashboards.css">
-     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body>
+<body onload="carregarGraficos()">
     <header>
         <div class="layout">
             <div> <img class="img_layout" src="../imagens/Coimbra fight (1).png" alt=""></div>
@@ -22,61 +22,327 @@
         </div>
     </header>
     <div class="main">
-    <div class="indicadores">
+        <div class="indicadores">
 
-        <div class="indicador">
-            <h3>Alta Frequência em:</h3>
-            <p>Setembro</p>
+            <div class="indicador">
+                <h3>Alta Frequência em:</h3>
+                <p id="kpi_frequencia"></p>
+            </div>
+
+            <div class="indicador">
+                <h3>Intencidade nesse mês:</h3>
+                <p id="kpi_intensidade"></p>
+            </div>
+
+            <div class="indicador">
+                <h3>Horas Médias por Mês:</h3>
+                <p id="kpi_media"></p>
+            </div>
         </div>
-
-        <div class="indicador">
-            <h3>Intencidade nesse mês:</h3>
-            <p>Alta</p>
-        </div>
-
-        <div class="indicador">
-            <h3>Horas Médias por Mês:</h3>
-            <p>10,6</p>
-        </div>
-    </div>
-
+        <div class="graficos">
             <div class="grafico-line">
+                <canvas id="myChart1" style="position: relative; height: 50vh; width: 80vh;"></canvas>
+            </div>
+
+            <div class="grafico-bar">
                 <canvas id="myChart2" style="position: relative; height: 50vh; width: 80vh;"></canvas>
             </div>
-            </div>
+        </div>
+    </div>
 </body>
 <script>
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-   
-    const ctx2 = document.getElementById('myChart2').getContext('2d');
-const mixedChart2 = new Chart(ctx2, {
-    data: {
-        datasets: [
-            {
-                type: 'line',
-                label: 'Temperatura média °C',
-                data: [30, 29, 28, 25, 22, 23],
-                backgroundColor: 'rgb(255, 0, 0)',
-                borderColor: 'rgb(255, 0, 0)',
-            },
-            {
-                type: 'line',
-                label: 'Umidade Média %',
-                data: [80, 82, 80, 85, 80, 83],
-                backgroundColor: 'rgb(0, 0, 255)',
-                borderColor: 'rgb(0, 0, 255)',
+
+    let dados = [];
+    function carregarGraficos() {
+        const idVar = sessionStorage.ID_USUARIO;
+
+        fetch(`/dash/graficos/${idVar}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                    plotarGrafico(resposta);
+                    plotarGraficoBar(resposta);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
             }
-        ],
-        labels: ['12:00', '13:00', '14:00', '15:00','16:00', '17:00'],
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: false
-        }
-      }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+        fetch(`/dash/kpiFre/${idVar}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta1) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta1)}`);
+                
+                kpiFre(resposta1);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+            fetch(`/dash/kpiInt/${idVar}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta2) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta2)}`);
+                
+                kpiInt(resposta2);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+             fetch(`/dash/kpiMedia/${idVar}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta3) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta3)}`);
+                
+                kpiMedia(resposta3);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
     }
-  });
+
+    function plotarGrafico(resposta) {
+
+        console.log('iniciando plotagem do gráfico...');
+
+        let labels = [];
+
+
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: 'Quantidade de Treinos',
+                data: [],
+                fill: false,
+                borderColor: '#ffbd22',
+                backgroundColor: '#ffbd00'
+            }
+            ]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+
+        for (i = 0; i < resposta.length; i++) {
+            let registro = resposta[i];
+
+            if (registro.mes == 1) {
+                labels.push('Janeiro');
+            } else if (registro.mes == 2) {
+                labels.push('Fevereiro');
+            } else if (registro.mes == 3) {
+                labels.push('Março');
+            } else if (registro.mes == 4) {
+                labels.push('Abril');
+            } else if (registro.mes == 5) {
+                labels.push('Maio');
+            } else if (registro.mes == 6) {
+                labels.push('Junho');
+            } else if (registro.mes == 7) {
+                labels.push('Julho');
+            } else if (registro.mes == 8) {
+                labels.push('Agosto');
+            } else if (registro.mes == 9) {
+                labels.push('Setembro');
+            } else if (registro.mes == 10) {
+                labels.push('Outubro');
+            } else if (registro.mes == 11) {
+                labels.push('Novembro');
+            } else if (registro.mes == 12) {
+                labels.push('Dezembro');
+            }
+
+            dados.datasets[0].data.push(registro.dias);
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'line',
+            data: dados,
+        };
+
+        // Adicionando gráfico criado em div na tela
+        let myChart1 = new Chart(
+            document.getElementById(`myChart1`),
+            config
+        );
+
+    }
+
+    function plotarGraficoBar(resposta) {
+
+        console.log('iniciando plotagem do gráfico...');
+
+        let labels = [];
+
+
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: 'Quantidade de Horas',
+                data: [],
+                fill: false,
+                backgroundColor: '#ffbd22'
+            }
+            ]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+
+        for (i = 0; i < resposta.length; i++) {
+            let registro = resposta[i];
+
+            if (registro.mes == 1) {
+                labels.push('Janeiro');
+            } else if (registro.mes == 2) {
+                labels.push('Fevereiro');
+            } else if (registro.mes == 3) {
+                labels.push('Março');
+            } else if (registro.mes == 4) {
+                labels.push('Abril');
+            } else if (registro.mes == 5) {
+                labels.push('Maio');
+            } else if (registro.mes == 6) {
+                labels.push('Junho');
+            } else if (registro.mes == 7) {
+                labels.push('Julho');
+            } else if (registro.mes == 8) {
+                labels.push('Agosto');
+            } else if (registro.mes == 9) {
+                labels.push('Setembro');
+            } else if (registro.mes == 10) {
+                labels.push('Outubro');
+            } else if (registro.mes == 11) {
+                labels.push('Novembro');
+            } else if (registro.mes == 12) {
+                labels.push('Dezembro');
+            }
+
+            dados.datasets[0].data.push(registro.horas);
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'bar',
+            data: dados,
+        };
+
+        // Adicionando gráfico criado em div na tela
+        let myChart2 = new Chart(
+            document.getElementById(`myChart2`),
+            config
+        );
+
+    }
+
+    function kpiFre(resposta1) {
+    let dados =[];
+    for (i = 0; i < resposta1.length; i++) {
+            let registro = resposta1[i];
+
+            if (registro.mes == 1) {
+                dados.push('Janeiro');
+            } else if (registro.mes == 2) {
+                dados.push('Fevereiro');
+            } else if (registro.mes == 3) {
+                dados.push('Março');
+            } else if (registro.mes == 4) {
+                dados.push('Abril');
+            } else if (registro.mes == 5) {
+                dados.push('Maio');
+            } else if (registro.mes == 6) {
+                dados.push('Junho');
+            } else if (registro.mes == 7) {
+                dados.push('Julho');
+            } else if (registro.mes == 8) {
+                dados.push('Agosto');
+            } else if (registro.mes == 9) {
+                dados.push('Setembro');
+            } else if (registro.mes == 10) {
+                dados.push('Outubro');
+            } else if (registro.mes == 11) {
+                dados.push('Novembro');
+            } else if (registro.mes == 12) {
+                dados.push('Dezembro');
+            } else {
+                dados.push('Sem Registro')
+            }
+        }
+        kpi_frequencia.innerHTML = dados;
+    }
+
+    function kpiInt(resposta2) {     
+    for (let index = 0; index < resposta2.length; index++) {
+    let registro = resposta2[index];
+    if(registro.intensidade == 'Baixa') {
+        kpi_intensidade.innerHTML = 'Baixa';
+    } else if (registro.intensidade == 'Boa') {
+        kpi_intensidade.innerHTML = 'Boa';
+    } else if(registro.intensidade == 'Alta') {
+        kpi_intensidade.innerHTML = 'Alta';
+    } else {
+        kpi_intensidade.innerHTML = 'Sem Registros';
+    }
+    }
+    }
+
+    function kpiMedia(resposta3) {
+    for (let index = 0; index < resposta3.length; index++) {
+    let registro = resposta3[index];
+    if(registro.media > 0) {
+        kpi_media.innerHTML = registro.media + 'h';
+    } else {
+        kpi_media.innerHTML ='Sem Registros';
+    }
+    }   
+    }
 </script>
 
 </html>
