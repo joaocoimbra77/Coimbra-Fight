@@ -30,7 +30,7 @@
             </div>
 
             <div class="indicador">
-                <h3>Intencidade nesse mês:</h3>
+                <h3>Intensidade atual:</h3>
                 <p id="kpi_intensidade"></p>
             </div>
 
@@ -128,9 +128,6 @@
         console.log('iniciando plotagem do gráfico...');
 
         let labels = [];
-
-
-        // Criando estrutura para plotar gráfico - dados
         let dados = {
             labels: labels,
             datasets: [{
@@ -146,8 +143,6 @@
         console.log('----------------------------------------------')
         console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
         console.log(resposta)
-
-        // Inserindo valores recebidos em estrutura para plotar o gráfico
 
         for (i = 0; i < resposta.length; i++) {
             let registro = resposta[i];
@@ -189,13 +184,11 @@
         console.log(dados.datasets)
         console.log('----------------------------------------------')
 
-        // Criando estrutura para plotar gráfico - config
         const config = {
             type: 'line',
             data: dados,
         };
 
-        // Adicionando gráfico criado em div na tela
         let myChart1 = new Chart(
             document.getElementById(`myChart1`),
             config
@@ -209,8 +202,6 @@
 
         let labels = [];
 
-
-        // Criando estrutura para plotar gráfico - dados
         let dados = {
             labels: labels,
             datasets: [{
@@ -225,8 +216,6 @@
         console.log('----------------------------------------------')
         console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
         console.log(resposta)
-
-        // Inserindo valores recebidos em estrutura para plotar o gráfico
 
         for (i = 0; i < resposta.length; i++) {
             let registro = resposta[i];
@@ -268,13 +257,11 @@
         console.log(dados.datasets)
         console.log('----------------------------------------------')
 
-        // Criando estrutura para plotar gráfico - config
         const config = {
             type: 'bar',
             data: dados,
         };
 
-        // Adicionando gráfico criado em div na tela
         let myChart2 = new Chart(
             document.getElementById(`myChart2`),
             config
@@ -284,6 +271,7 @@
 
     function kpiFre(resposta1) {
     let dados =[];
+
     for (i = 0; i < resposta1.length; i++) {
             let registro = resposta1[i];
 
@@ -311,14 +299,17 @@
                 dados.push('Novembro');
             } else if (registro.mes == 12) {
                 dados.push('Dezembro');
-            } else {
-                dados.push('Sem Registro')
-            }
+            } 
         }
+        if (dados.length == 0) {
+        kpi_frequencia.innerHTML = 'Sem Registro';    
+        } else 
         kpi_frequencia.innerHTML = dados;
+
     }
 
     function kpiInt(resposta2) {     
+        kpi_intensidade.innerHTML = 'Sem Registro';
     for (let index = 0; index < resposta2.length; index++) {
     let registro = resposta2[index];
     if(registro.intensidade == 'Baixa') {
@@ -327,8 +318,6 @@
         kpi_intensidade.innerHTML = 'Boa';
     } else if(registro.intensidade == 'Alta') {
         kpi_intensidade.innerHTML = 'Alta';
-    } else {
-        kpi_intensidade.innerHTML = 'Sem Registros';
     }
     }
     }

@@ -52,7 +52,8 @@
             <div class="falha" id="erro_dias"></div><br> <input type="number" id="iptDias"><br><br>
             <h4>Informe a quantidade de Horas de treino nesse mês:</h4>
             <div class="falha" id="erro_horas"></div><br> <input type="number" id="iptHoras"><br><br><br><br>
-            <button id="btn-registro" onclick="registrar()">Registrar</button>
+            <button id="btn-registro" onclick="registrar()">Registrar</button><br><br>
+            <div class="certo" id="msg_certo"></div>
         </div>
     </div>
 </body>
@@ -98,7 +99,7 @@
                     console.log("resposta: ", resposta);
 
                     if (resposta.ok) {
-
+                        msg_certo.innerHTML = 'Treino cadastrado com sucesso! Redirecionando para a Dashbord.'
                 
                         setTimeout(() => {
                             window.location = "./dash.html";

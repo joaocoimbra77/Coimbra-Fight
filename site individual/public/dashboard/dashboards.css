@@ -196,3 +196,7 @@ background-color: #ffbd22;
 .campos .falha {
   color: #ED145B;
 }
+
+.campos .certo {
+  color: #6BD14F;
+}

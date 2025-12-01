@@ -88,6 +88,8 @@
       erro +=1;
     } if(erro == 0) {
     document.getElementById("mensagem").style.display = "block";
+    
+    // calculo do MET 
     var calorias = 9 * peso;
     var caloriasFinal = calorias * treino;
     
@@ -95,6 +97,9 @@
     Levando em consideração que cada treino será de 1 hora e de uma intensidade moderada.<p><b>Sua perca de calorias atinge ${calorias}kcal por dia. Comprindo esses requesitos, ao final dos ${treino} dias de treino você perdeu ${caloriasFinal}kcal no mês!!</b></p><br>
     Vale lembrar que não é apenas os treinos que te fará ter resultados, mas também uma alimentação saúdavel e uma rotina de sono equilibrada. Não perca tempo e entre já para o time e faça parte desse esporte incrível!❤️</span>`;
     }
+    iptAltura.value='';
+    iptPeso.value='';
+    iptTreino.value='';
     }
 </script>
 </html>
